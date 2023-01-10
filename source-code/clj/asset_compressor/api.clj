@@ -16,9 +16,9 @@
 (def compress-assets! engine/compress-assets!)
 
 ; asset-compressor.html-compressor
-(def compress-html  html-compressor/compress-html)
-(def compress-html! html-compressor/compress-html!)
+; (def compress-html  html-compressor/compress-html)
+; (def compress-html! html-compressor/compress-html!)
 
 ; asset-compressor.js-compressor
-(def compress-js  js-compressor/compress-js)
-(def compress-js! js-compressor/compress-js!)
+; (def compress-js  js-compressor/compress-js)
+; (def compress-js! js-compressor/compress-js!)
