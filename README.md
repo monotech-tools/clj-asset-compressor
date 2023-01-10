@@ -1,0 +1,2 @@
+# clj-asset-compressor
+*
