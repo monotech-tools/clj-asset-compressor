@@ -8,6 +8,9 @@
 ;; ----------------------------------------------------------------------------
 
 (defn compress-html
+  ; @description
+  ; Returns the given file-content compressed.
+  ;
   ; @param (string) file-content
   ;
   ; @usage
@@ -23,6 +26,10 @@
   ; TODO
 
 (defn compress-html!
+  ; @description
+  ; Compresses all the given resources into the output file.
+  ; If any resource is a directory all of its files will be compressed into the output file.
+  ;
   ; @param (string) output-path
   ; @param (strings in vector) resources
   ;

@@ -6,6 +6,10 @@
 ;; ----------------------------------------------------------------------------
 
 (defn compress-assets!
+  ; @description
+  ; Compresses all the given resources into the output file.
+  ; If a resource is directory all of its files will be compressed into the output file.
+  ;
   ; @param (string) output-path
   ; @param (strings in vector) resources
   ; @param (function) compressor-f
