@@ -45,7 +45,7 @@
           (f2 [result resource]
               (cond (io/directory? resource) (-> resource io/all-file-list f3)
                     (io/file?      resource) (f1 result resource)
-                    :return        result))
+                    :return result))
 
           ; @param (strings in vector) resources
           ;
