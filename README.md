@@ -31,6 +31,8 @@ You can track the changes of the <strong>clj-asset-compressor</strong> library [
 
 - [How to compress a CSS file?](#how-to-compress-a-css-file)
 
+# Usage
+
 ### How to compress a CSS file?
 
 The [`asset-compressor.api/compress-css!`](documentation/clj/asset-compressor/API.md/#compress-css)
