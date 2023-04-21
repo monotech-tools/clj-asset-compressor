@@ -26,11 +26,11 @@ The <strong>clj-asset-compressor</strong> functional documentation is [available
 
 You can track the changes of the <strong>clj-asset-compressor</strong> library [here](CHANGES.md).
 
+# Usage
+
 ### Index
 
 - [How to compress a CSS file?](#how-to-compress-a-css-file)
-
-# Usage
 
 ### How to compress a CSS file?
 
