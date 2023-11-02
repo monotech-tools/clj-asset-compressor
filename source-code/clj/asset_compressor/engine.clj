@@ -7,8 +7,8 @@
 
 (defn compress-assets!
   ; @description
-  ; Compresses all the given resources into the output file.
-  ; If a resource is directory all of its files will be compressed into the output file.
+  ; - Compresses all the resources found by the given 'resources' vector into the output file.
+  ; - If a resource is a directory all of its files will be compressed into the output file.
   ;
   ; @param (string) output-path
   ; @param (strings in vector) resources
@@ -43,8 +43,8 @@
           ; @usage
           ; (f2 "..." "my-style.css")
           (f2 [result resource]
-              (cond (io/directory? resource) (-> resource io/all-file-list f3)
-                    (io/file?      resource) (f1 result resource)
+              (cond (io/directory? resource) (str result (-> resource io/all-file-list f3))
+                    (io/file?      resource) (f1  result resource)
                     :return result))
 
           ; @param (strings in vector) resources
