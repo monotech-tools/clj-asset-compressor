@@ -23,8 +23,8 @@
 
 ```
 @description
-Compresses all the given resources into the output file.
-If a resource is directory all of its files will be compressed into the output file.
+- Compresses all the resources found by the given 'resources' vector into the output file.
+- If a resource is a directory all of its files will be compressed into the output file.
 ```
 
 ```
@@ -53,8 +53,8 @@ If a resource is directory all of its files will be compressed into the output f
                                      (str result (f0 resource-path) "\n"))
 
           (f2 [result resource]
-              (cond (io/directory? resource) (-> resource io/all-file-list f3)
-                    (io/file?      resource) (f1 result resource)
+              (cond (io/directory? resource) (str result (-> resource io/all-file-list f3))
+                    (io/file?      resource) (f1  result resource)
                     :return result))
 
           (f3 [resources] (reduce f2 "" resources))]
@@ -84,7 +84,7 @@ If a resource is directory all of its files will be compressed into the output f
 
 ```
 @description
-Returns the given file-content compressed.
+Returns the given 'file-content' string compressed.
 ```
 
 ```
@@ -145,8 +145,8 @@ Returns the given file-content compressed.
 
 ```
 @description
-Compresses all the given resources into the output file.
-If any resource is a directory all of its files will be compressed into the output file.
+- Compresses all the resources found by the given 'resources' vector into the output file.
+- If any resource is a directory all of its files will be compressed into the output file.
 ```
 
 ```
@@ -188,7 +188,7 @@ If any resource is a directory all of its files will be compressed into the outp
 
 ```
 @description
-Returns the given file-content compressed.
+Returns the given 'file-content' string compressed.
 ```
 
 ```
@@ -239,8 +239,8 @@ Returns the given file-content compressed.
 
 ```
 @description
-Compresses all the given resources into the output file.
-If any resource is a directory all of its files will be compressed into the output file.
+- Compresses all the resources found by the given 'resources' vector into the output file.
+- If any resource is a directory all of its files will be compressed into the output file.
 ```
 
 ```
@@ -282,7 +282,7 @@ If any resource is a directory all of its files will be compressed into the outp
 
 ```
 @description
-Returns the given file-content compressed.
+Returns the given 'file-content' string compressed.
 ```
 
 ```
@@ -333,8 +333,8 @@ Returns the given file-content compressed.
 
 ```
 @description
-Compresses all the given resources into the output file.
-If any resource is a directory all of its files will be compressed into the output file.
+- Compresses all the resources found by the given 'resources' vector into the output file.
+- If any resource is a directory all of its files will be compressed into the output file.
 ```
 
 ```
