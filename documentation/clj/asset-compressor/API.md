@@ -1,5 +1,9 @@
 
-# asset-compressor.api Clojure namespace
+### asset-compressor.api
+
+Functional documentation of the asset-compressor.api Clojure namespace
+
+---
 
 ##### [README](../../../README.md) > [DOCUMENTATION](../../COVER.md) > asset-compressor.api
 
@@ -18,6 +22,8 @@
 - [compress-js](#compress-js)
 
 - [compress-js!](#compress-js)
+
+---
 
 ### compress-assets!
 
@@ -372,5 +378,5 @@ Returns the given 'file-content' string compressed.
 
 ---
 
-This documentation is generated with the [clj-docs-generator](https://github.com/bithandshake/clj-docs-generator) engine.
+<sub>This documentation is generated with the [clj-docs-generator](https://github.com/bithandshake/clj-docs-generator) engine.</sub>
 
