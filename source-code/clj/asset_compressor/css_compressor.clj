@@ -25,8 +25,8 @@
   [file-content]
   (letfn [(f [result [a b]] (string/replace-part result a b))]
          (as-> file-content % (syntax/remove-comments % "/*" "*/")
-                              (string/trim-gaps       %)
-                              (reduce f % [["\n" ""]
+                              (reduce f % [[" "  ""]
+                                           ["\n" ""]
                                            [" (" "("]
                                            [" )" ")"]
                                            [" {" "{"]
