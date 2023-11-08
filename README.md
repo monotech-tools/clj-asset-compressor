@@ -10,13 +10,13 @@ The <strong>clj-asset-compressor</strong> is a CSS / HTML / JS file minifier for
 ### deps.edn
 
 ```
-{:deps {bithandshake/clj-asset-compressor {:git/url "https://github.com/bithandshake/clj-asset-compressor"
-                                           :sha     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}}
+{:deps {monotech-tools/clj-asset-compressor {:git/url "https://github.com/monotech-tools/clj-asset-compressor"
+                                             :sha     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}}
 ```
 
 ### Current version
 
-Check out the latest commit on the [release branch](https://github.com/bithandshake/clj-asset-compressor/tree/release).
+Check out the latest commit on the [release branch](https://github.com/monotech-tools/clj-asset-compressor/tree/release).
 
 ### Documentation
 
