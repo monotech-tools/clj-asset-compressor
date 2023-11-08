@@ -3,9 +3,9 @@
 
 ### Overview
 
-The <strong>clj-asset-compressor</strong> is a CSS / HTML / JS minifier for Clojure projects.
+The <strong>clj-asset-compressor</strong> is a CSS / HTML / JS file minifier for Clojure projects.
 
-> The HTML and JS compressors are missing. This library only compresses CSS files now!
+> The HTML and JS compressors are unfinished at the moment. This library only compresses CSS files!
 
 ### deps.edn
 
