@@ -2,7 +2,7 @@
 (ns asset-compressor.js-compressor
     (:require [asset-compressor.engine :as engine]
               [string.api              :as string]
-              [syntax.api              :as syntax]))
+              [syntax-reader.api       :as syntax-reader]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

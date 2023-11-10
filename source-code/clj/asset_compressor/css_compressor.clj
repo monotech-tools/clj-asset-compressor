@@ -2,7 +2,7 @@
 (ns asset-compressor.css-compressor
     (:require [asset-compressor.engine :as engine]
               [string.api              :as string]
-              [syntax.api              :as syntax]))
+              [syntax-reader.api       :as syntax-reader]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -24,7 +24,7 @@
   ; @return (string)
   [file-content]
   (letfn [(f [result [a b]] (string/replace-part result a b))]
-         (as-> file-content % (syntax/remove-comments % "/*" "*/")
+         (as-> file-content % (syntax-reader/remove-commented-zones % "/*" "*/")
                               (reduce f % [[" "  ""]
                                            ["\n" ""]
                                            [" (" "("]
