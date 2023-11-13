@@ -24,7 +24,7 @@
   ; @return (string)
   [file-content]
   (letfn [(f [result [a b]] (string/replace-part result a b))]
-         (as-> file-content % (syntax-reader/remove-commented-zones % "/*" "*/")
+         (as-> file-content % (syntax-reader/remove-commented-parts % "/*" "*/")
                               (reduce f % [[" "  ""]
                                            ["\n" ""]
                                            [" (" "("]
