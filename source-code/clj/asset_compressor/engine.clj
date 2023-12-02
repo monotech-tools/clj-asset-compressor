@@ -7,7 +7,7 @@
 
 (defn compress-assets!
   ; @description
-  ; - Compresses all the resources found by the given 'resources' vector into the output file.
+  ; - Compresses all the resources (found with the given 'resources' vector) into the output file.
   ; - If a resource is a directory all of its files will be compressed into the output file.
   ;
   ; @param (string) output-path
