@@ -1,7 +1,7 @@
 
 (ns asset-compressor.css-compressor
     (:require [asset-compressor.engine :as engine]
-              [string.api              :as string]
+              [fruits.string.api       :as string]
               [syntax-reader.api       :as syntax-reader]))
 
 ;; ----------------------------------------------------------------------------
