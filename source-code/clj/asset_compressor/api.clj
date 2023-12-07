@@ -7,13 +7,13 @@
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-; asset-compressor.css-compressor
+; @redirect (asset-compressor.css-compressor)
 (def compress-css  css-compressor/compress-css)
 (def compress-css! css-compressor/compress-css!)
 
-; asset-compressor.engine
+; @redirect (asset-compressor.engine)
 (def compress-assets! engine/compress-assets!)
 
-; asset-compressor.js-compressor
+; @redirect (asset-compressor.js-compressor)
 ; (def compress-js  js-compressor/compress-js)
 ; (def compress-js! js-compressor/compress-js!)
