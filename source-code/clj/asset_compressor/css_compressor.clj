@@ -23,15 +23,20 @@
   ;
   ; @return (string)
   [file-content]
-  (letfn [(f0 [result [a b]] (string/replace-part result a b))]
-         (as-> file-content % (syntax-reader/remove-commented-parts % [[:comment "/*" "*/"]])
-                              (reduce f0 % [[" "  ""]
+  (letfn [(f0 [result [a b]] (string/replace-part result a b {:recur? true}))]
+         (as-> file-content % (syntax-reader/remove-tags % [[:comment      #"\/\*" #"\*\/"]
+                                                            [:double-quote #"\""   #"\"" {:keep? true}]
+                                                            [:single-quote #"\'"   #"\'" {:keep? true}]])
+                              (reduce f0 % [["  " " "]
                                             ["\n" ""]
                                             [" (" "("]
                                             [" )" ")"]
                                             [" {" "{"]
                                             [" }" "}"]
                                             [": " ":"]
+                                            ["; " ";"]
+                                            ["{ " "{"]
+                                            ["} " "}"]
                                             [";}" "}"]]))))
 
 (defn compress-css!

@@ -22,8 +22,14 @@
   ; "..."
   ;
   ; @return (string)
-  [file-content])
-  ; TODO
+  [file-content]
+  (letfn [(f0 [result [a b]] (string/replace-part result a b {:recur? true}))]
+         (as-> file-content % (syntax-reader/remove-tags % [[:single-line-comment #"\/\/" #"\n"]
+                                                            [:multi-line-comment  #"\/\*" #"\*\/"]
+                                                            [:double-quote        #"\""   #"\"" {:keep? true}]
+                                                            [:single-quote        #"\'"   #"\'" {:keep? true}]])
+                              (reduce f0 % [["  " " "]
+                                            ["\n" ""]]))))
 
 (defn compress-js!
   ; @description
