@@ -1,6 +1,7 @@
 
 (ns asset-compressor.css-compressor
     (:require [asset-compressor.engine :as engine]
+              [fruits.noop.api         :refer [none return]]
               [fruits.string.api       :as string]
               [syntax-reader.api       :as syntax-reader]))
 
@@ -9,45 +10,86 @@
 
 (defn compress-css
   ; @description
-  ; Returns the given 'file-content' string compressed.
+  ; Returns the given 'n' CSS string compressed.
   ;
-  ; @param (string) file-content
+  ; @param (string) n
   ;
   ; @usage
-  ; (compress-css "body {\n color: blue; }")
-  ;
-  ; @example
   ; (compress-css "body {\n color: blue; }")
   ; =>
   ; "body{color:blue}"
   ;
   ; @return (string)
-  [file-content]
-  (letfn [(f0 [result [a b]] (string/replace-part result a b {:recur? true}))]
-         (as-> file-content % (syntax-reader/remove-tags % [[:comment      #"\/\*" #"\*\/"]
-                                                            [:double-quote #"\""   #"\"" {:keep? true}]
-                                                            [:single-quote #"\'"   #"\'" {:keep? true}]])
-                              (reduce f0 % [["  " " "]
-                                            ["\n" ""]
-                                            [" (" "("]
-                                            [" )" ")"]
-                                            [" {" "{"]
-                                            [" }" "}"]
-                                            [": " ":"]
-                                            ["; " ";"]
-                                            ["{ " "{"]
-                                            ["} " "}"]
-                                            [";}" "}"]]))))
-
-(defn compress-css!
-  ; @description
-  ; - Compresses all the resources (found with the given 'resources' vector) into the output file.
-  ; - If any resource is a directory all of its files will be compressed into the output file.
+  [n]
+  ; 0.)
+  ; Comments:
+  ; - E.g., "body { backgound-color: red } /* My comment */"
+  ; - Commented parts can be removed.
+  ; - Interpreter must be disabled while processing (to prevent misreading syntax).
   ;
-  ; @param (string) output-path
-  ; @param (strings in vector) resources
+  ; 1.)
+  ; Double quoted strings:
+  ; - E.g., "background-image: url( "my-image.png" )"
+  ; - Surronding whitespaces can be removed.
+  ; - Interpreter must be disabled while processing (quoted parts are not compressed).
+  ;
+  ; 2.)
+  ; Single quoted strings:
+  ; - E.g., "background-image: url( 'my-image.png' )"
+  ; - Surronding whitespaces can be removed.
+  ; - Interpreter must be disabled while processing (quoted parts are not compressed).
+  ;
+  ; 3-6.)
+  ; Opening / closing parenthesis and brace characters:
+  ; - Surronding whitespaces can be removed.
+  ; - Semicolons preceding a closing brace can be removed.
+  ;
+  ; 7-8.)
+  ; Opening / closing bracket characters:
+  ; - Surronding whitespaces around brackets CANNOT be removed!
+  ;
+  ; 9-11.)
+  ; Colon, semicolon, comma characters:
+  ; - Surronding whitespaces can be removed.
+  ;
+  ; 12.)
+  ; Multiple whitespaces:
+  ; - Can be replaced with a single whitespace.
+  ;
+  ; 13.)
+  ; Newlines
+  ; - Can be removed.
+  (-> n string/trim
+      (syntax-reader/update-tags [[:t0  #"\s*\/\*" #"\*\/\s*" {:disable-interpreter? true :update-f none}]
+                                  [:t1  #"\s*\""   #"\"\s*"   {:disable-interpreter? true :update-f string/trim}]
+                                  [:t2  #"\s*\'"   #"\'\s*"   {:disable-interpreter? true :update-f string/trim}]
+                                  [:t3  #"[\s]{0,}\([\s]{0,}"                            {:update-f (fn [_] "(")}]
+                                  [:t4  #"[\s]{0,}\)[\s]{0,}"                            {:update-f (fn [_] ")")}]
+                                  [:t5  #"[\s]{0,}\{[\s]{0,}"                            {:update-f (fn [_] "{")}]
+                                  [:t6  #"[\s\;]{0,}\}[\s]{0,}"                          {:update-f (fn [_] "}")}]
+                                  [:t7  #"[\s]{0,}\[[\s]{0,}"                            {:update-f return}]
+                                  [:t8  #"[\s]{0,}\][\s]{0,}"                            {:update-f return}]
+                                  [:t9  #"[\s]{0,}\:[\s]{0,}"                            {:update-f (fn [_] ":")}]
+                                  [:t10 #"[\s]{0,}\;[\s]{0,}"                            {:update-f (fn [_] ";")}]
+                                  [:t11 #"[\s]{0,}\,[\s]{0,}"                            {:update-f (fn [_] ",")}]
+                                  [:t12 #"\s{2,}"                                        {:update-f (fn [_] " ")}]
+                                  [:t13 #"\n"                                            {:update-f none}]])))
+
+(defn compress-css-files!
+  ; @description
+  ; - Compresses CSS files within the given source paths that match the given filename pattern.
+  ; - Returns the compressed output.
+  ;
+  ; @param (map) options
+  ; {:compressor-f (function)(opt)
+  ;   Default: compress-css
+  ;  :filename-pattern (regex pattern)(opt)
+  ;   Default: #".*\.css"
+  ;  :output-path (string)
+  ;  :source-paths (strings in vector)}
   ;
   ; @usage
-  ; (compress-css! "my-style.min.css" ["my-directory" "my-style.css"])
-  [output-path resources]
-  (engine/compress-assets! output-path resources compress-css))
+  ; (compress-css-files! {:output-path "my-style.min.css"
+  ;                       :source-paths ["my-directory"]})
+  [{:keys [compressor-f filename-pattern output-path source-paths] :or {compressor-f compress-css filename-pattern #".*\.css"}}]
+  (engine/compress-assets! {:compressor-f compressor-f :filename-pattern filename-pattern :output-path output-path :source-paths source-paths}))

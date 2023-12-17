@@ -1,59 +1,66 @@
 
 (ns asset-compressor.engine
-    (:require [io.api :as io]))
+    (:require [asset-compressor.tests :as tests]
+              [io.api                 :as io]
+              [validator.api          :as v]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
 (defn compress-assets!
   ; @description
-  ; - Compresses all the resources (found with the given 'resources' vector) into the output file.
-  ; - If a resource is a directory all of its files will be compressed into the output file.
+  ; - Compresses files with the given 'compressor-f' function that match the given filename pattern.
+  ; - Returns the compressed output.
   ;
-  ; @param (string) output-path
-  ; @param (strings in vector) resources
-  ; @param (function) compressor-f
+  ; @param (map) options
+  ; {:compressor-f (function)
+  ;  :filename-pattern (regex pattern)
+  ;  :output-path (string)
+  ;  :source-paths (strings in vector)}
   ;
   ; @usage
   ; (defn my-compressor-f [file-content] ...)
-  ; (compress-assets! "my-style.min.css" ["my-directory" "my-style.css"] my-compressor-f)
-  [output-path resources compressor-f]
-  (letfn [
-          ; @param (string) resource-path
-          ;
-          ; @usage
-          ; (f0 "my-style.css")
-          (f0 [resource-path] (if-let [resource-content (io/read-file resource-path {:warn? true})]
-                                      (compressor-f resource-content)))
+  ; (compress-assets! {:compressor-f     my-compressor-f
+  ;                    :filename-pattern #".*\.css"
+  ;                    :output-path      "my-style.min.css"
+  ;                    :source-paths     ["my-directory"]})
+  ;
+  ; @return (string)
+  [{:keys [compressor-f filename-pattern output-path source-paths] :as options}]
+  (if (v/valid? options tests/OPTIONS-TEST {:prefix "options"})
+      (letfn [; @param (string) filepath
+              ;
+              ; @usage
+              ; (f0 "my-style.css")
+              (f0 [filepath] (if-let [file-content (io/read-file filepath {:warn? true})]
+                                     (try (compressor-f file-content)
+                                          (catch Exception e nil))))
 
-          ; @param (string) result
-          ; @param (string) resource-path
-          ;
-          ; @usage
-          ; (f1 "..." "my-style.css")
-          (f1 [result resource-path] (println "Compressing asset:" resource-path)
-                                     (str result (f0 resource-path) "\n"))
+              ; @param (string) result
+              ; @param (string) filepath
+              ;
+              ; @usage
+              ; (f1 "..." "my-style.css")
+              (f1 [result filepath]
+                  (println "Compressing asset:" filepath)
+                  (str result (f0 filepath) "\n"))
 
-          ; @param (string) result
-          ; @param (string) resource
-          ;
-          ; @usage
-          ; (f2 "..." "my-directory")
-          ;
-          ; @usage
-          ; (f2 "..." "my-style.css")
-          (f2 [result resource]
-              (cond (io/directory? resource) (str result (-> resource io/all-file-list f3))
-                    (io/file?      resource) (f1  result resource)
-                    :return result))
+              ; @param (string) result
+              ; @param (string) source-path
+              ;
+              ; @usage
+              ; (f2 "..." "my-directory")
+              (f2 [result source-path]
+                  (let [file-list (io/search-files source-path filename-pattern)]
+                       (reduce f1 result file-list)))
 
-          ; @param (strings in vector) resources
-          ;
-          ; @usage
-          ; (f3 ["my-directory" "my-style.css"])
-          (f3 [resources] (reduce f2 "" resources))]
+              ; @param (strings in vector) source-paths
+              ;
+              ; @usage
+              ; (f3 ["my-directory"])
+              (f3 [source-paths] (reduce f2 "" source-paths))]
 
-         ; ...
-         (println "Compressing assets to output:" output-path)
-         (let [output-content (f3 resources)]
-              (io/write-file! output-path output-content {:create? true :warn? true}))))
+             ; ...
+             (println "Compressing assets to output:" output-path)
+             (let [output-content (f3 source-paths)]
+                  (io/write-file! output-path output-content {:create? true :warn? true :return? true})))))
