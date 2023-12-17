@@ -15,9 +15,9 @@
   ; @param (string) n
   ;
   ; @usage
-  ; (compress-html "body {\n color: blue; }"); (compress-html "<div>\n  <img src="my-image.png" />\n</div>")
+  ; (compress-html "<div>  <img src="my-image.png" />  </div>")
   ; =>
-  ; "<div><img src="my-image.png"></div>"
+  ; "<div><img src="my-image.png"/></div>"
   ;
   ; @return (string)
   [n]
@@ -80,6 +80,7 @@
   ;  :output-path (string)
   ;  :source-paths (strings in vector)}
   ;
+  ; @usage
   ; (compress-html-files! {:output-path "my-page.min.html"
   ;                        :source-paths ["my-directory"]})
   [{:keys [compressor-f filename-pattern output-path source-paths] :or {compressor-f compress-html filename-pattern #".*\.html"}}]

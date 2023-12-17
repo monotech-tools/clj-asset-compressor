@@ -3,7 +3,7 @@
 
 ### Overview
 
-The <strong>clj-asset-compressor</strong> is a CSS / HTML / JS file compressor for Clojure projects.
+The <strong>clj-asset-compressor</strong> is a simple CSS / HTML / JS file compressor for Clojure projects.
 
 ### deps.edn
 

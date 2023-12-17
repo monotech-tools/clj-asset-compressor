@@ -14,7 +14,7 @@
   ;
   ; @param (string) n
   ;
-  ; @example
+  ; @usage
   ; (compress-js "function my-function ( my-param )\n  {\n    ...\n  }")
   ; =>
   ; "function my-function(my-param){...}"
