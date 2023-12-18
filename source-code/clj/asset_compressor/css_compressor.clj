@@ -60,20 +60,20 @@
   ; Newlines
   ; - Can be removed.
   (-> n string/trim
-      (syntax-reader/update-tags [[:t0  #"\s*\/\*" #"\*\/\s*" {:disable-interpreter? true :update-f none}]
-                                  [:t1  #"\s*\""   #"\"\s*"   {:disable-interpreter? true :update-f string/trim}]
-                                  [:t2  #"\s*\'"   #"\'\s*"   {:disable-interpreter? true :update-f string/trim}]
-                                  [:t3  #"[\s]{0,}\([\s]{0,}"                            {:update-f (fn [_] "(")}]
-                                  [:t4  #"[\s]{0,}\)[\s]{0,}"                            {:update-f (fn [_] ")")}]
-                                  [:t5  #"[\s]{0,}\{[\s]{0,}"                            {:update-f (fn [_] "{")}]
-                                  [:t6  #"[\s\;]{0,}\}[\s]{0,}"                          {:update-f (fn [_] "}")}]
-                                  [:t7  #"[\s]{0,}\[[\s]{0,}"                            {:update-f return}]
-                                  [:t8  #"[\s]{0,}\][\s]{0,}"                            {:update-f return}]
-                                  [:t9  #"[\s]{0,}\:[\s]{0,}"                            {:update-f (fn [_] ":")}]
-                                  [:t10 #"[\s]{0,}\;[\s]{0,}"                            {:update-f (fn [_] ";")}]
-                                  [:t11 #"[\s]{0,}\,[\s]{0,}"                            {:update-f (fn [_] ",")}]
-                                  [:t12 #"\s{2,}"                                        {:update-f (fn [_] " ")}]
-                                  [:t13 #"\n"                                            {:update-f none}]])))
+      (syntax-reader/update-tags [[:t0  #"\s*\/\*" #"\*\/\s*" {:accepted-children [] :update-f none}]
+                                  [:t1  #"\s*\""   #"\"\s*"   {:accepted-children [] :update-f string/trim}]
+                                  [:t2  #"\s*\'"   #"\'\s*"   {:accepted-children [] :update-f string/trim}]
+                                  [:t3  #"[\s]{0,}\([\s]{0,}"                       {:update-f (fn [_] "(")}]
+                                  [:t4  #"[\s]{0,}\)[\s]{0,}"                       {:update-f (fn [_] ")")}]
+                                  [:t5  #"[\s]{0,}\{[\s]{0,}"                       {:update-f (fn [_] "{")}]
+                                  [:t6  #"[\s\;]{0,}\}[\s]{0,}"                     {:update-f (fn [_] "}")}]
+                                  [:t7  #"[\s]{0,}\[[\s]{0,}"                       {:update-f return}]
+                                  [:t8  #"[\s]{0,}\][\s]{0,}"                       {:update-f return}]
+                                  [:t9  #"[\s]{0,}\:[\s]{0,}"                       {:update-f (fn [_] ":")}]
+                                  [:t10 #"[\s]{0,}\;[\s]{0,}"                       {:update-f (fn [_] ";")}]
+                                  [:t11 #"[\s]{0,}\,[\s]{0,}"                       {:update-f (fn [_] ",")}]
+                                  [:t12 #"\s{2,}"                                   {:update-f (fn [_] " ")}]
+                                  [:t13 #"\n"                                       {:update-f none}]])))
 
 (defn compress-css-files!
   ; @description

@@ -57,15 +57,15 @@
   ; Newlines
   ; - Can be removed.
   (-> n string/trim
-      (syntax-reader/update-tags [[:t0 #"\s*\<\!\-\-" #"\-\-\>\s*" {:disable-interpreter? true :update-f none}]
-                                  [:t1 #"\""          #"\""        {:disable-interpreter? true :update-f return}]
-                                  [:t2 #"\'"          #"\'"        {:disable-interpreter? true :update-f return}]
-                                  [:t3 #"="                                                   {:update-f return}]
-                                  [:t4 #"[\s]{0,}\<[\s]{0,}"                                  {:update-f (fn [_] "<")}]
-                                  [:t5 #"[\s]{0,}\>[\s]{0,}"                                  {:update-f (fn [_] ">")}]
-                                  [:t6 #"[\s]{0,}\/\>[\s]{0,}"                                {:update-f (fn [_] "/>")}]
-                                  [:t7 #"\s{2,}"                                              {:update-f (fn [_] " ")}]
-                                  [:t8 #"\n"                                                  {:update-f none}]])))
+      (syntax-reader/update-tags [[:t0 #"\s*\<\!\-\-" #"\-\-\>\s*" {:accepted-children [] :update-f none}]
+                                  [:t1 #"\""          #"\""        {:accepted-children [] :update-f return}]
+                                  [:t2 #"\'"          #"\'"        {:accepted-children [] :update-f return}]
+                                  [:t3 #"="                                              {:update-f return}]
+                                  [:t4 #"[\s]{0,}\<[\s]{0,}"                             {:update-f (fn [_] "<")}]
+                                  [:t5 #"[\s]{0,}\>[\s]{0,}"                             {:update-f (fn [_] ">")}]
+                                  [:t6 #"[\s]{0,}\/\>[\s]{0,}"                           {:update-f (fn [_] "/>")}]
+                                  [:t7 #"\s{2,}"                                         {:update-f (fn [_] " ")}]
+                                  [:t8 #"\n"                                             {:update-f none}]])))
 
 (defn compress-html-files!
   ; @description
