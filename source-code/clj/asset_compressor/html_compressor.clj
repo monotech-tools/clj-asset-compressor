@@ -1,9 +1,9 @@
 
 (ns asset-compressor.html-compressor
     (:require [asset-compressor.engine :as engine]
+              [fruits.noop.api         :refer [none return]]
               [fruits.string.api       :as string]
-              [syntax-reader.api       :as syntax-reader]
-              [fruits.noop.api         :refer [none return]]))
+              [syntax-reader.api       :as syntax-reader]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
