@@ -5,7 +5,7 @@
          bithandshake/cljc-io           {:git/url "https://github.com/bithandshake/cljc-io"
                                          :sha     "5dbacde9e46eeeccdb92e5d9214441132f5a1be8"}
          bithandshake/cljc-validator    {:git/url "https://github.com/bithandshake/cljc-validator"
-                                         :sha     "6596ab758c51ef91f0be4c7e4c77eb1f21b29a41"}
+                                         :sha     "bac3e7a3a9fb7995a2695badb6d594a028a945dc"}
          mt-devtools/cljc-syntax-reader {:git/url "https://github.com/bithandshake/cljc-io"
-                                         :sha     "6596ab758c51ef91f0be4c7e4c77eb1f21b29a41"}
+                                         :sha     "bac3e7a3a9fb7995a2695badb6d594a028a945dc"}
          org.clojure/clojure            {:mvn/version "1.10.1"}}}
