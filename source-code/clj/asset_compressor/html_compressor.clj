@@ -61,9 +61,9 @@
                                   [:t1 #"\""          #"\""        {:accepted-children [] :update-f return}]
                                   [:t2 #"\'"          #"\'"        {:accepted-children [] :update-f return}]
                                   [:t3 #"="                                              {:update-f return}]
-                                  [:t4 #"[\s]{0,}\<[\s]{0,}"                             {:update-f (fn [_] "<")}]
-                                  [:t5 #"[\s]{0,}\>[\s]{0,}"                             {:update-f (fn [_] ">")}]
-                                  [:t6 #"[\s]{0,}\/\>[\s]{0,}"                           {:update-f (fn [_] "/>")}]
+                                  [:t4 #"[\s]*\<[\s]*"                                   {:update-f (fn [_] "<")}]
+                                  [:t5 #"[\s]*\>[\s]*"                                   {:update-f (fn [_] ">")}]
+                                  [:t6 #"[\s]*\/\>[\s]*"                                 {:update-f (fn [_] "/>")}]
                                   [:t7 #"\s{2,}"                                         {:update-f (fn [_] " ")}]
                                   [:t8 #"\n"                                             {:update-f none}]])))
 
