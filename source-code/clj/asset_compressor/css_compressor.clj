@@ -77,7 +77,7 @@
 
 (defn compress-css-files!
   ; @description
-  ; - Compresses CSS files within the given source paths that match the given filename pattern.
+  ; - Compresses CSS files (that match the given filename pattern) within the given source paths.
   ; - Returns the compressed output.
   ;
   ; @param (map) options

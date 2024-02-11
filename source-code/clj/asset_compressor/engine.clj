@@ -9,7 +9,7 @@
 
 (defn compress-assets!
   ; @description
-  ; - Compresses files with the given 'compressor-f' function that match the given filename pattern.
+  ; - Compresses files (that match the given filename pattern) with the given 'compressor-f' function.
   ; - Returns the compressed output.
   ;
   ; @param (map) options

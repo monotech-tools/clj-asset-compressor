@@ -90,7 +90,7 @@
 
 (defn compress-js-files!
   ; @description
-  ; - Compresses JS files within the given source paths that match the given filename pattern.
+  ; - Compresses JS files (that match the given filename pattern) within the given source paths.
   ; - Returns the compressed output.
   ;
   ; @param (map) options

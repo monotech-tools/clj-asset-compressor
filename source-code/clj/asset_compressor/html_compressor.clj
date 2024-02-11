@@ -69,7 +69,7 @@
 
 (defn compress-html-files!
   ; @description
-  ; - Compresses HTML files within the given source paths that match the given filename pattern.
+  ; - Compresses HTML files (that match the given filename pattern) within the given source paths.
   ; - Returns the compressed output.
   ;
   ; @param (map) options
