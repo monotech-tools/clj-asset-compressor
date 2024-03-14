@@ -16,10 +16,10 @@ The <strong>clj-asset-compressor</strong> is a simple CSS / HTML / JS file compr
 
 Check out the latest commit on the [release branch](https://github.com/mt-devtools/clj-asset-compressor/tree/release).
 
-### Documentation
-
-The <strong>clj-asset-compressor</strong> functional documentation is [available here](https://mt-devtools.github.io/clj-asset-compressor).
-
 ### Changelog
 
 You can track the changes of the <strong>clj-asset-compressor</strong> library [here](CHANGES.md).
+
+# Documentation
+
+The <strong>clj-asset-compressor</strong> functional documentation is [available here](https://mt-devtools.github.io/clj-asset-compressor).
