@@ -9,7 +9,7 @@
 ; @ignore
 ;
 ; @links
-; [cljc-validator](mt-utilities.github.io/cljc-validator)
+; [cljc-validator](github.com/mt-utilities/cljc-validator)
 ;
 ; @constant (map)
 (def OPTIONS-TEST

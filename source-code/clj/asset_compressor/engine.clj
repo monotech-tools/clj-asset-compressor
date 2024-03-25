@@ -27,7 +27,7 @@
   ;
   ; @return (string)
   [{:keys [compressor-f filename-pattern output-path source-paths] :as options}]
-  (if (v/valid? options tests/OPTIONS-TEST {:prefix "options"})
+  (if (v/valid? options [tests/OPTIONS-TEST] {:prefix "options"})
       (letfn [; @param (string) filepath
               ;
               ; @usage
